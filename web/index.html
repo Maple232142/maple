@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#2a0c0c">
+<title>Cờ Tướng 3D</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="app">
+  <div class="bg-glow"></div>
+
+  <!-- ============ HOME ============ -->
+  <section id="home" class="screen active">
+    <div class="logo-wrap">
+      <div class="coin-stage">
+        <div class="coin">
+          <div class="coin-face front"><span>帥</span></div>
+          <div class="coin-edge"></div>
+          <div class="coin-face back"><span>將</span></div>
+        </div>
+      </div>
+      <h1 class="title-3d" data-text="CỜ TƯỚNG">CỜ TƯỚNG</h1>
+      <p class="subtitle">象 棋 · ONLINE 3D</p>
+    </div>
+    <nav class="menu">
+      <button class="btn gold big" data-go="online"><i>⚔</i>Chơi online</button>
+      <button class="btn red big" data-go="aiSetup"><i>♟</i>Chơi với máy</button>
+      <button class="btn dark big" id="btnLocal"><i>👥</i>Hai người một máy</button>
+      <button class="btn dark big" data-go="settings"><i>⚙</i>Cài đặt</button>
+    </nav>
+    <p class="foot">Chạm quân để chọn · Chạm điểm sáng để đi</p>
+  </section>
+
+  <!-- ============ AI SETUP ============ -->
+  <section id="aiSetup" class="screen">
+    <header class="bar"><button class="icon-btn" data-back>‹</button><h2>Chơi với máy</h2><span></span></header>
+    <div class="panel">
+      <h3>Độ khó</h3>
+      <div class="seg" id="segLevel">
+        <button data-v="easy">Dễ</button>
+        <button data-v="medium" class="on">Vừa</button>
+        <button data-v="hard">Khó</button>
+      </div>
+      <h3>Bạn cầm quân</h3>
+      <div class="seg" id="segColor">
+        <button data-v="r" class="on"><b class="dot r"></b>Đỏ (đi trước)</button>
+        <button data-v="b"><b class="dot b"></b>Đen</button>
+      </div>
+      <button class="btn gold big" id="btnStartAI">Bắt đầu</button>
+    </div>
+  </section>
+
+  <!-- ============ ONLINE ============ -->
+  <section id="online" class="screen">
+    <header class="bar"><button class="icon-btn" data-back>‹</button><h2>Chơi online</h2><span></span></header>
+    <div class="panel">
+      <label class="field"><span>Tên của bạn</span><input id="inName" maxlength="16" placeholder="Kỳ thủ"></label>
+      <label class="field"><span>Máy chủ</span><input id="inServer" placeholder="ws://192.168.1.10:3000" autocapitalize="off" autocomplete="off" spellcheck="false"></label>
+      <div id="netStatus" class="net-status">Chưa kết nối</div>
+      <div id="lobbyIdle">
+        <button class="btn gold big" id="btnQuick"><i>⚡</i>Ghép trận nhanh</button>
+        <button class="btn red big" id="btnCreate"><i>＋</i>Tạo phòng riêng</button>
+        <div class="join-row">
+          <input id="inCode" inputmode="numeric" maxlength="4" placeholder="Mã phòng">
+          <button class="btn dark" id="btnJoin">Vào phòng</button>
+        </div>
+      </div>
+      <div id="lobbyWait" class="hidden">
+        <div class="spinner"></div>
+        <p id="waitText">Đang tìm đối thủ…</p>
+        <div id="roomCode" class="room-code hidden"></div>
+        <button class="btn dark" id="btnCancel">Huỷ</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SETTINGS ============ -->
+  <section id="settings" class="screen">
+    <header class="bar"><button class="icon-btn" data-back>‹</button><h2>Cài đặt</h2><span></span></header>
+    <div class="panel">
+      <label class="toggle"><span>Âm thanh</span><input type="checkbox" id="optSound" checked><i></i></label>
+      <label class="toggle"><span>Rung khi ăn quân</span><input type="checkbox" id="optVibrate" checked><i></i></label>
+      <label class="toggle"><span>Bàn cờ nghiêng 3D</span><input type="checkbox" id="optTilt" checked><i></i></label>
+      <label class="toggle"><span>Hiện nước đi hợp lệ</span><input type="checkbox" id="optHints" checked><i></i></label>
+      <p class="muted">Cờ Tướng 3D · v1.0</p>
+    </div>
+  </section>
+
+  <!-- ============ GAME ============ -->
+  <section id="game" class="screen">
+    <header class="bar game-bar">
+      <button class="icon-btn" id="btnExit">‹</button>
+      <h2 id="modeTitle">Ván cờ</h2>
+      <button class="icon-btn" id="btnMenu">⋯</button>
+    </header>
+
+    <div class="player" id="pTop">
+      <div class="avatar"><span>將</span></div>
+      <div class="pinfo"><b class="pname">Đối thủ</b><small class="pstate"></small></div>
+      <div class="tray"></div>
+    </div>
+
+    <div class="stage" id="stage">
+      <div class="tilt" id="tilt">
+        <div class="frame" id="frame">
+          <div class="board" id="board">
+            <svg class="grid" viewBox="0 0 900 1000" preserveAspectRatio="none" id="gridSvg"></svg>
+            <div class="spots" id="spots"></div>
+            <div class="pieces" id="pieces"></div>
+            <div class="fx3d" id="fx3d"></div>
+          </div>
+        </div>
+      </div>
+      <div class="emote" id="emote"></div>
+    </div>
+
+    <div class="player me" id="pBot">
+      <div class="avatar"><span>帥</span></div>
+      <div class="pinfo"><b class="pname">Bạn</b><small class="pstate"></small></div>
+      <div class="tray"></div>
+    </div>
+
+    <div class="controls" id="controls">
+      <button class="ctl" id="btnUndo"><i>↶</i><span>Đi lại</span></button>
+      <button class="ctl" id="btnHint"><i>💡</i><span>Gợi ý</span></button>
+      <button class="ctl" id="btnFlip"><i>⇅</i><span>Xoay bàn</span></button>
+      <button class="ctl" id="btnChat"><i>💬</i><span>Biểu cảm</span></button>
+      <button class="ctl danger" id="btnResign"><i>⚑</i><span>Xin thua</span></button>
+    </div>
+    <div class="emoji-bar hidden" id="emojiBar">
+      <button>👍</button><button>😄</button><button>😮</button><button>😡</button><button>🤝</button><button>Hay lắm!</button><button>Nhanh lên!</button>
+    </div>
+  </section>
+
+  <!-- ============ OVERLAYS ============ -->
+  <div id="banner" class="banner"><div class="banner-inner"><b>將 軍</b><span>CHIẾU TƯỚNG!</span></div></div>
+
+  <div id="modal" class="modal">
+    <div class="modal-card">
+      <div class="modal-icon" id="mIcon">帥</div>
+      <h2 id="mTitle">Chiến thắng!</h2>
+      <p id="mText"></p>
+      <div class="modal-actions" id="mActions"></div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <canvas id="sparks"></canvas>
+</div>
+
+<script src="js/xiangqi.js"></script>
+<script src="js/ai.js"></script>
+<script src="js/sound.js"></script>
+<script src="js/effects.js"></script>
+<script src="js/net.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

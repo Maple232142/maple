@@ -1,0 +1,35 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.maple.cotuong'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId 'com.maple.cotuong'
+        minSdk 26
+        targetSdk 35
+        versionCode 1
+        versionName '1.0'
+    }
+
+    sourceSets {
+        // The game itself (HTML/CSS/JS) lives in /web and is shared with the online server.
+        main.assets.srcDirs = ['../../web']
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            // Signed with the debug key so the release APK is installable out of the box.
+            // Replace with your own keystore before publishing to Google Play.
+            signingConfig signingConfigs.debug
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
