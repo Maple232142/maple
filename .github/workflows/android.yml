@@ -28,8 +28,6 @@ jobs:
           npm install --no-audit --no-fund
           npm test
 
-      - uses: android-actions/setup-android@v3
-
       - name: Build APK
         working-directory: android
         run: |
