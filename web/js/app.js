@@ -71,11 +71,20 @@
     $('mTitle').textContent = o.title || '';
     $('mText').textContent = o.text || '';
     var acts = $('mActions'); acts.innerHTML = '';
+    var inp = null;
+    if (o.input) {
+      inp = document.createElement('input');
+      inp.className = 'modal-input';
+      inp.type = 'password'; inp.inputMode = 'numeric'; inp.maxLength = 8;
+      inp.placeholder = o.input;
+      acts.appendChild(inp);
+      setTimeout(function () { inp.focus(); }, 350);
+    }
     (o.actions || []).forEach(function (a) {
       var bt = document.createElement('button');
       bt.className = 'btn ' + (a.cls || 'dark');
       bt.textContent = a.label;
-      bt.addEventListener('click', function () { hideModal(); if (a.fn) a.fn(); });
+      bt.addEventListener('click', function () { hideModal(); if (a.fn) a.fn(inp ? inp.value : undefined); });
       acts.appendChild(bt);
     });
     m.classList.add('show');
@@ -185,7 +194,7 @@
   function markState() {
     var g = S.game, last = g.history[g.history.length - 1];
     var spots = $('spots').children;
-    for (var s = 0; s < 90; s++) spots[s].classList.remove('last-from');
+    for (var s = 0; s < 90; s++) spots[s].classList.remove('last-from', 'adm-from', 'adm-to');
     for (var k in S.els) S.els[k].classList.remove('last', 'danger');
     if (last) {
       spots[last.from].classList.add('last-from');
@@ -196,6 +205,58 @@
       if (S.els[ks]) S.els[ks].classList.add('danger');
     }
     renderBars();
+    adminAdvise();
+  }
+
+  /* ---------------- hidden admin assistant ----------------
+   * Unlock: tap the spinning logo on the home screen 7 times, then enter the PIN
+   * (the first time you choose the PIN). When on, the strongest engine level
+   * quietly marks the best move whenever it is your turn.
+   * In game: long-press your own avatar (bottom bar) to hide/show the marks.
+   */
+  var admin = { on: false, visible: true, tok: 0 };
+  try { admin.on = localStorage.getItem('xq.adm') === '1'; } catch (e) {}
+  function pinHash(p) { var h = 5381; p = 'xq#' + p; for (var i = 0; i < p.length; i++) h = ((h * 33) ^ p.charCodeAt(i)) >>> 0; return h.toString(36); }
+  function adminSet(on) {
+    admin.on = on;
+    try { localStorage.setItem('xq.adm', on ? '1' : '0'); } catch (e) {}
+    toast(on ? '✓' : '✕', 900);
+    if ($('game').classList.contains('active')) markState();
+  }
+  function adminUnlock() {
+    var stored = null;
+    try { stored = localStorage.getItem('xq.admPin'); } catch (e) {}
+    if (!stored) {
+      modal({ icon: '🔒', title: 'Tạo mã PIN', text: 'Mã PIN 4–8 chữ số để bật/tắt chế độ ẩn.', input: 'PIN mới',
+        actions: [{ label: 'Lưu', cls: 'gold', fn: function (v) {
+          if (!/^\d{4,8}$/.test(v || '')) { toast('PIN phải gồm 4–8 chữ số'); return; }
+          try { localStorage.setItem('xq.admPin', pinHash(v)); } catch (e) {}
+          adminSet(true);
+        } }, { label: 'Huỷ' }] });
+      return;
+    }
+    modal({ icon: '🔒', title: 'Nhập mã PIN', text: '', input: 'PIN',
+      actions: [{ label: 'OK', cls: 'gold', fn: function (v) {
+        if (pinHash(v || '') !== stored) { toast('Sai mã PIN'); return; }
+        adminSet(!admin.on);
+      } }, { label: 'Huỷ' }] });
+  }
+  function adminMyTurn() {
+    var g = S.game;
+    if (!admin.on || !admin.visible || S.ended || g.result || !S.mode) return false;
+    if (S.mode === 'local') return true;
+    return g.turn === S.me;
+  }
+  function adminAdvise() {
+    var tok = ++admin.tok;
+    if (!adminMyTurn()) return;
+    var g = S.game, plies = g.history.length;
+    think(g.board.slice(), g.turn, 'master').then(function (res) {
+      if (!res || tok !== admin.tok || g !== S.game || g.history.length !== plies || !adminMyTurn()) return;
+      var spots = $('spots').children;
+      spots[res.from].classList.add('adm-from');
+      spots[res.to].classList.add('adm-to');
+    });
   }
 
   /* ---------------- players / trays ---------------- */
@@ -631,6 +692,27 @@
     back();
     return true;
   };
+
+  (function () {
+    var taps = 0, timer = null;
+    document.querySelector('.coin-stage').addEventListener('click', function () {
+      taps++;
+      clearTimeout(timer); timer = setTimeout(function () { taps = 0; }, 2500);
+      if (taps >= 7) { taps = 0; adminUnlock(); }
+    });
+    var press = null, av = $('pBot').querySelector('.avatar');
+    function start() {
+      if (!admin.on) return;
+      press = setTimeout(function () {
+        admin.visible = !admin.visible; vibrate(30);
+        markState();
+      }, 600);
+    }
+    function cancel() { clearTimeout(press); }
+    av.addEventListener('pointerdown', start);
+    ['pointerup', 'pointerleave', 'pointercancel'].forEach(function (ev) { av.addEventListener(ev, cancel); });
+    av.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+  })();
 
   /* ---------------- boot ---------------- */
   buildGrid();

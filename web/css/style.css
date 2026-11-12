@@ -309,3 +309,11 @@ input { font: inherit; }
 }
 .spot.best::after { width: 92%; height: 92%; background: none; border: 3px solid var(--gold); box-shadow: 0 0 18px var(--gold);
   animation: capPulse .9s ease-in-out infinite; opacity: 1; transform: none; }
+
+/* hidden assistant marks (deliberately subtle) */
+.spot.adm-from, .spot.adm-to { border-radius: 50%; }
+.spot.adm-from { box-shadow: inset 0 0 0 2px rgba(70,210,255,.55); }
+.spot.adm-to { box-shadow: inset 0 0 0 2px rgba(70,210,255,.8), 0 0 10px rgba(70,210,255,.35);
+  background: radial-gradient(circle, rgba(70,210,255,.55) 0 12%, transparent 14%); }
+.modal-input { padding: 13px 14px; border-radius: 12px; border: 1px solid rgba(245,200,106,.35); background: rgba(0,0,0,.35);
+  color: var(--text); font-size: 20px; letter-spacing: 8px; text-align: center; outline: none; user-select: text; -webkit-user-select: text; }

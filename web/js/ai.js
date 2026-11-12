@@ -165,7 +165,8 @@ function XiangqiAIFactory(XQ) {
   var LEVELS = {
     easy: { depth: 2, timeMs: 400, noise: 120 },
     medium: { depth: 3, timeMs: 1000, noise: 30 },
-    hard: { depth: 6, timeMs: 2200, noise: 0 }
+    hard: { depth: 6, timeMs: 2200, noise: 0 },
+    master: { depth: 12, timeMs: 3000, noise: 0 }
   };
 
   function think(board, side, level) {
