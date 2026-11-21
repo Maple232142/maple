@@ -16,6 +16,9 @@ Viết 10 tiêu đề, dưới đây là 3 tiêu đề tốt nhất:
 
 **Lý do chọn tiêu đề đầu:** nó hứa đúng câu trả lời mà đoạn payoff đưa ra (cần bao nhiêu điểm, Pochettino phải sửa gì).
 
+⚠️ **Cập nhật: đây là video đầu tiên của kênh.** Kênh mới chưa có người đăng ký, nên YouTube gần như chưa đưa video lên bảng tin. Lượt xem ban đầu chủ yếu đến từ **tìm kiếm**. Vì vậy nên đổi sang tiêu đề có chữ "xuống hạng", tức đúng từ người xem sẽ gõ:
+**"8 điểm sau 10 trận: MU thật sự có thể xuống hạng?"** (98/100, cũng chứa số liệu và câu hỏi mở). Chữ thumbnail "ANFIELD ĐANG CHỜ" vẫn giữ nguyên.
+
 **Chữ trên thumbnail: `ANFIELD ĐANG CHỜ`.** Cặp tiêu đề + thumbnail này đạt 100/100, vì thumbnail không lặp lại chữ nào của tiêu đề. Các phương án bị loại:
 - "THỨ 18?!": lặp số 18 với tiêu đề.
 - "1 THẮNG / 10": lặp chữ.

@@ -58,7 +58,11 @@ Hiện tại skill nên dùng:
 ## Định dạng của tôi
 
 - **Chỉ lồng tiếng, không lộ mặt.** Vì vậy mỗi đoạn kịch bản bắt buộc có `[ON SCREEN: ...]` cụ thể. Không có mặt người dẫn thì hình ảnh là thứ duy nhất giữ người xem.
-- **Hình ảnh:** chủ yếu là đồ họa tự làm (bảng xếp hạng, phép tính, dòng thời gian, ô kết quả) và ảnh báo chí được phép dùng. Tránh dùng clip trận đấu dài, vì dễ bị khiếu nại bản quyền từ giải đấu.
+- **Hình ảnh: dựng hoàn toàn từ ảnh cắt.** Ảnh cầu thủ, HLV đã tách nền, đặt lên nền tự làm, kết hợp đồ họa (bảng xếp hạng, phép tính, dòng thời gian, ô kết quả). Không dùng clip trận đấu.
+  - Ảnh tĩnh không có chuyển động, nên **mỗi khung hình chỉ giữ tối đa 3–4 giây** rồi phải có thay đổi: zoom chậm, trượt ảnh, ảnh cắt bật vào, chữ hiện lên.
+  - Ghi chú `[ON SCREEN]` phải ghi rõ **ảnh nào** và **chuyển động gì**. Ví dụ: "ảnh cắt Pochettino trượt vào từ phải, zoom chậm 110%".
+  - Câu châm biếm nên có hình đi kèm: biểu cảm của ảnh cắt, phóng to bất ngờ, hoặc chữ chú thích bật ra. Đây là nơi giọng hài của kênh hiện lên hình.
+  - Ảnh nguồn phải được phép dùng. Ưu tiên ảnh có giấy phép (ví dụ Wikimedia Commons), ghi nguồn trong mô tả.
 - **Độ dài:** video chính 3–6 phút, Shorts 20–55 giây.
 - **Mở đầu:** câu hook là câu đầu tiên, không có intro hay nhạc hiệu dài. Logo kênh, nếu có, chỉ hiện tối đa 2 giây sau hook.
 - **Kết thúc:** đúng một lời kêu gọi, thường là mời dự đoán hoặc trả lời một câu hỏi ở phần bình luận. Không có màn hình kêu gọi đăng ký.
