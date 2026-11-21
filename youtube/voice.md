@@ -8,7 +8,7 @@ Dựng ngày 21/11/2026 từ câu trả lời của chủ kênh. Mục "Tôi nó
 Một người cụ thể: **anh Tuấn, 27 tuổi, xem Ngoại hạng Anh mỗi cuối tuần nhưng không phải fan cuồng MU.** Anh biết Bruno Fernandes là ai, nhưng không nhớ MU đã thay bao nhiêu HLV hay đội hình đá sơ đồ gì. Anh mở video vì thấy MU đứng thứ 18 và tò mò "lại có chuyện gì nữa". Anh cười khi MU gặp hạn, nhưng sẽ bỏ đi nếu video chỉ toàn chửi mà không giải thích được gì.
 
 Từ đó suy ra:
-- **Luôn giải thích bối cảnh trong một câu.** Ví dụ: "Carrick, người tạm quyền từ mùa trước...". Đừng mặc định người xem đã biết.
+- **Luôn giải thích bối cảnh trong một câu.** Ví dụ: "Pochettino, người từng đưa Tottenham vào chung kết Champions League...". Đừng mặc định người xem đã biết.
 - **Không dùng thuật ngữ chiến thuật mà không giải thích.** "Pressing" thì nói kèm "dâng lên ép người cầm bóng".
 - **Không viết riêng cho fan MU.** Fan đội khác cũng phải xem được và thấy vui.
 
