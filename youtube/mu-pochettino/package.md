@@ -89,11 +89,13 @@ python3 ~/.claude/skills/yt-chapters/chapters.py phude.srt --target 7
 
 Có 3 đoạn tự đứng được một mình, dài 20–55 giây. Câu mở đầu mới được chấm trên bản tiếng Anh, giống cách chấm hook.
 
+Câu mở đầu viết theo giọng châm biếm: câu đầu là thông tin thật, câu đùa đặt ở cuối. Công cụ chấm điểm không hiểu câu đùa và coi đó là phần thừa, nên điểm thấp hơn bản nghiêm túc 3–5 điểm. Đây là cái giá chấp nhận được để giữ giọng kênh.
+
 | # | Đoạn (ước lượng) | Câu mở đầu mới (tiếng Việt) | Điểm |
 |---|---|---|---|
-| 1 | 0:29–0:59 (30s) | "Bạn nghĩ vấn đề của MU là thua? Trước khi trách hàng thủ, hãy nhìn 5 trận hòa sau 10 vòng. Tại sao?" | 78 STRONG |
-| 2 | 2:38–3:31 (53s) | "CLB của bạn cần 32 điểm từ 28 trận để trụ hạng. Pochettino tìm chúng ở đâu, trước khi quá muộn?" | 73 STRONG |
-| 3 | 1:24–2:04 (40s) | "Bạn có 4 ngày trước trận Anfield để sửa một đội đang đứng thứ 18. Bạn sẽ đổi gì đầu tiên?" | 73 STRONG |
+| 1 | 0:29–0:59 (30s) | "Trước khi trách hàng thủ MU, hãy nhìn 5 trận hòa sau 10 vòng. Tại sao? Những trận đó MU không thua. Chỉ là… không thắng." | 73 STRONG |
+| 2 | 2:38–3:31 (53s) | "Các bạn thử tính xem: MU cần 32 điểm từ 28 trận, trước khi quá muộn. Bằng cách nào? Tôi hỏi giùm một người bạn." | 70 WORKABLE |
+| 3 | 1:24–2:04 (40s) | "Các bạn có 4 ngày trước trận Anfield để sửa một đội đang đứng thứ 18. Các bạn sẽ đổi gì đầu tiên? Pochettino đang hỏi đấy." | 70 WORKABLE |
 
 **Chữ hiện trên màn hình 2 giây đầu (khác với lời nói):**
 1. "5 HÒA. 1 THẮNG."
