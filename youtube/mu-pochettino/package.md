@@ -44,12 +44,12 @@ MU đứng thứ 18 sau 10 vòng, khởi đầu tệ nhất 40 năm. Pochettino 
 Dự đoán tỷ số Liverpool – MU ngày 22/11 ở phần bình luận. Bình luận đoán đúng sẽ được ghim.
 
 00:00 MU thứ 18: chuyện gì vậy?
-00:25 Vấn đề là 5 trận hòa
-00:57 Carrick bị sa thải
-01:14 Pochettino mang đến gì
-01:48 Cần xem gì ở Anfield
-02:11 Cần bao nhiêu điểm để trụ hạng
-02:57 Dự đoán của bạn
+00:29 Vấn đề là 5 trận hòa
+00:59 Carrick bị sa thải
+01:24 Pochettino là ai
+02:04 Cần xem gì ở Anfield
+02:38 Cần bao nhiêu điểm để trụ hạng
+03:31 Dự đoán của bạn
 
 Video phân tích bảng xếp hạng Premier League 2026–27 sau 10 vòng: thành tích 1 thắng, 5 hòa, 4 thua của MU, việc Michael Carrick bị sa thải ngày 12/11, sự nghiệp của Mauricio Pochettino, và phép tính để MU chạm mốc 40 điểm. Số liệu tính đến 20/11/2026.
 
@@ -76,7 +76,7 @@ Tiêu đề thiếu chữ "xuống hạng". Nếu muốn ưu tiên tìm kiếm h
 
 ## 3. Chapters (`/yt-chapters`)
 
-Công cụ `chapters.py` tìm ra 7 mốc chuyển đoạn trên một bản phụ đề **ước lượng** (dựng từ kịch bản theo tốc độ nói khoảng 175 âm tiết/phút). Tôi đã đặt lại tiêu đề cho từng chapter, và danh sách đạt đủ 3 quy tắc của YouTube: bắt đầu từ 00:00, có ít nhất 3 mục, mỗi mục dài ít nhất 10 giây (mục ngắn nhất 17 giây).
+Công cụ `chapters.py` tìm ra 7 mốc chuyển đoạn trên một bản phụ đề **ước lượng** (dựng từ kịch bản theo tốc độ nói khoảng 175 âm tiết/phút). Tôi đã đặt lại tiêu đề cho từng chapter, và danh sách đạt đủ 3 quy tắc của YouTube: bắt đầu từ 00:00, có ít nhất 3 mục, mỗi mục dài ít nhất 10 giây (mục ngắn nhất 25 giây).
 
 ⚠️ **Sau khi quay xong**, hãy tải phụ đề tự động (.srt) từ YouTube Studio và chạy lại công cụ. Các mốc thời gian thật sẽ khác với bản ước lượng:
 ```bash
@@ -91,9 +91,9 @@ Có 3 đoạn tự đứng được một mình, dài 20–55 giây. Câu mở �
 
 | # | Đoạn (ước lượng) | Câu mở đầu mới (tiếng Việt) | Điểm |
 |---|---|---|---|
-| 1 | 0:25–0:57 (32s) | "Bạn nghĩ vấn đề của MU là thua? Trước khi trách hàng thủ, hãy nhìn 5 trận hòa sau 10 vòng. Tại sao?" | 78 STRONG |
-| 2 | 2:11–2:57 (46s) | "CLB của bạn cần 32 điểm từ 28 trận để trụ hạng. Pochettino tìm chúng ở đâu, trước khi quá muộn?" | 73 STRONG |
-| 3 | 1:14–1:48 (34s) | "Bạn có 4 ngày trước trận Anfield để sửa một đội đang đứng thứ 18. Bạn sẽ đổi gì đầu tiên?" | 73 STRONG |
+| 1 | 0:29–0:59 (30s) | "Bạn nghĩ vấn đề của MU là thua? Trước khi trách hàng thủ, hãy nhìn 5 trận hòa sau 10 vòng. Tại sao?" | 78 STRONG |
+| 2 | 2:38–3:31 (53s) | "CLB của bạn cần 32 điểm từ 28 trận để trụ hạng. Pochettino tìm chúng ở đâu, trước khi quá muộn?" | 73 STRONG |
+| 3 | 1:24–2:04 (40s) | "Bạn có 4 ngày trước trận Anfield để sửa một đội đang đứng thứ 18. Bạn sẽ đổi gì đầu tiên?" | 73 STRONG |
 
 **Chữ hiện trên màn hình 2 giây đầu (khác với lời nói):**
 1. "5 HÒA. 1 THẮNG."
@@ -101,9 +101,9 @@ Có 3 đoạn tự đứng được một mình, dài 20–55 giây. Câu mở �
 3. "4 NGÀY"
 
 **Điểm lặp vòng (loop):**
-1. Kết bằng "...cần sửa thứ khác". Câu mở đầu "vấn đề là thua?" trả lời ngược lại câu này.
-2. Kết bằng "ranh giới giữa trụ hạng và xuống hạng". Câu mở đầu "32 điểm" quay về đúng con số đó.
-3. Kết bằng "thời gian là thứ MU thiếu nhất". Câu mở đầu "4 ngày" nối tiếp ý đó.
+1. Kết bằng "MU chỉ… không thắng. Rất nhiều lần." Câu mở đầu "vấn đề là thua?" trả lời ngược lại câu này.
+2. Kết bằng "quy ước cũng bắt đầu đáng sợ rồi". Câu mở đầu "32 điểm" quay về đúng phép tính đó.
+3. Kết bằng "Chúc ông may mắn, thật lòng đấy." Câu mở đầu "4 ngày" nối tiếp ý đó.
 
 **Khung dọc 9:16:** khi cắt từ 16:9, bảng xếp hạng và dòng thời gian sẽ bị mất. Hãy dựng lại các đồ họa đó theo khổ dọc, đừng chỉ crop mặt người nói.
 
