@@ -12,13 +12,24 @@ VOICE, OUT = sys.argv[1], sys.argv[2]
 WHAT = sys.argv[3] if len(sys.argv) > 3 else "all"
 PREVIEW = "--preview" in sys.argv
 os.makedirs(OUT, exist_ok=True); CACHE = os.path.join(OUT, "tts"); os.makedirs(CACHE, exist_ok=True)
-voice = PiperVoice.load(os.path.join(VOICE, "vi_VN-vais1000-medium.onnx"), config_path=os.path.join(VOICE, "vi_VN-vais1000-medium.onnx.json"))
-CFG = SynthesisConfig(length_scale=0.93)
+import glob, subprocess
+_model = glob.glob(os.path.join(VOICE, "*.onnx"))[0]
+voice = PiperVoice.load(_model, config_path=_model + ".json")
+SPEAKER = int(os.environ["VOICE_SPEAKER"]) if os.environ.get("VOICE_SPEAKER") else None
+CFG = SynthesisConfig(speaker_id=SPEAKER, length_scale=float(os.environ.get("VOICE_SPEED", "0.93")),
+                      noise_scale=0.5 if SPEAKER is not None else None, noise_w_scale=0.6 if SPEAKER is not None else None)
+# optional ffmpeg filter for the voice (deepen / warm); output resampled to SR
+VOICE_FX = os.environ.get("VOICE_FX", "")
+TAG = hashlib.md5(f"{_model}|{SPEAKER}|{CFG.length_scale}|{VOICE_FX}".encode()).hexdigest()[:8]
 
 def tts(text):
-    p = os.path.join(CACHE, hashlib.md5(text.encode()).hexdigest() + ".wav")
+    p = os.path.join(CACHE, TAG + "-" + hashlib.md5(text.encode()).hexdigest() + ".wav")
     if not os.path.exists(p):
-        with wave.open(p, "wb") as w: voice.synthesize_wav(phonetic(text), w, syn_config=CFG)
+        raw = p + ".raw.wav"
+        with wave.open(raw, "wb") as w: voice.synthesize_wav(phonetic(text), w, syn_config=CFG)
+        af = (VOICE_FX + "," if VOICE_FX else "") + f"aresample={SR}"
+        subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", raw, "-af", af, "-ac", "1", "-c:a", "pcm_s16le", p], check=True)
+        os.remove(raw)
     a, sr = read_wav(p); assert sr == SR, sr
     # trim leading/trailing near-silence
     idx = np.where(np.abs(a) > 0.01)[0]
