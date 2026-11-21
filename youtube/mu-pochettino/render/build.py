@@ -12,9 +12,18 @@ VOICE, OUT = sys.argv[1], sys.argv[2]
 WHAT = sys.argv[3] if len(sys.argv) > 3 else "all"
 PREVIEW = "--preview" in sys.argv
 os.makedirs(OUT, exist_ok=True); CACHE = os.path.join(OUT, "tts"); os.makedirs(CACHE, exist_ok=True)
-import glob, subprocess
-_model = glob.glob(os.path.join(VOICE, "*.onnx"))[0]
-voice = PiperVoice.load(_model, config_path=_model + ".json")
+import glob, subprocess, re, time
+FPT = VOICE.startswith("fpt:")          # e.g. VOICE=fpt:leminh  -> FPT.AI cloud voice
+if FPT:
+    from fpt_tts import synth as fpt_synth
+    _model = VOICE
+else:
+    _model = glob.glob(os.path.join(VOICE, "*.onnx"))[0]
+    voice = PiperVoice.load(_model, config_path=_model + ".json")
+
+def fpt_text(t):
+    t = t.replace("…", ",").replace(" – ", ", ").replace("HLV", "huấn luyện viên")
+    return re.sub(r"\bMU\b", "Man U", t)
 SPEAKER = int(os.environ["VOICE_SPEAKER"]) if os.environ.get("VOICE_SPEAKER") else None
 CFG = SynthesisConfig(speaker_id=SPEAKER, length_scale=float(os.environ.get("VOICE_SPEED", "0.93")),
                       noise_scale=0.5 if SPEAKER is not None else None, noise_w_scale=0.6 if SPEAKER is not None else None)
@@ -26,7 +35,12 @@ def tts(text):
     p = os.path.join(CACHE, TAG + "-" + hashlib.md5(text.encode()).hexdigest() + ".wav")
     if not os.path.exists(p):
         raw = p + ".raw.wav"
-        with wave.open(raw, "wb") as w: voice.synthesize_wav(phonetic(text), w, syn_config=CFG)
+        if FPT:
+            raw = p + ".raw.mp3"
+            fpt_synth(fpt_text(text), raw, voice=VOICE[4:], speed=os.environ.get("FPT_SPEED", "0"))
+            time.sleep(1.1)  # stay under the per-minute limit
+        else:
+            with wave.open(raw, "wb") as w: voice.synthesize_wav(phonetic(text), w, syn_config=CFG)
         af = (VOICE_FX + "," if VOICE_FX else "") + f"aresample={SR}"
         subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", raw, "-af", af, "-ac", "1", "-c:a", "pcm_s16le", p], check=True)
         os.remove(raw)
